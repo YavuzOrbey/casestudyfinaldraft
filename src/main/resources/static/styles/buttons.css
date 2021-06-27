@@ -1,0 +1,18 @@
+.button{
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+.submit-button{
+    background: #4B042B;
+}
+.secondary-button {
+    background: #7f43e7;
+
+}
+.button:hover, .button:focus {
+    background-color: #689B3A;
+    color: white;
+}

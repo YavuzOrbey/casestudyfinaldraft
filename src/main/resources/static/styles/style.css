@@ -1,0 +1,42 @@
+@import url("https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap");
+.secondary-nav .dropdown-menu {
+  /* This will only affect the bootstrap dropdown menu up in the nav bar. A lot of websites (KhanAcademy for instance) have this feature when you click the button expands into a BIG container full of different options*/
+  width: 100vw;
+  height: 200px;
+}
+body {
+  font-family: "Oswald", sans-serif;
+  overflow-x: hidden;
+}
+nav {
+  height: 40px;
+  display: flex;
+  justify-content: flex-end;
+  font-family: "Merriweather", serif;
+  background: linear-gradient(to right, #5E0030, #8249f7);
+  box-sizing: content-box;
+  border-bottom: 10px solid #e2e2e2;
+}
+
+#secondary-nav{
+background: #e2e2e2;
+}
+h6 + ul li {
+    margin-left: 10px;
+}
+#form {
+  width: 400px;
+  border: 1px solid rgba(121, 121, 121, 0.822);
+  padding: 10px;
+}
+#form a {
+  text-decoration: none;
+}
+
+.error{
+color: red
+}
+
+#main-content{
+background: #eee;
+}
