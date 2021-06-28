@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Timestamp;
 import java.util.List;
 @Service
 public class MeasurementService {
@@ -16,6 +17,7 @@ public class MeasurementService {
     //autowire the constructor for testing purposes
 
     public void save(Measurement measurement){
+        measurement.setUpdated_on(new Timestamp(System.currentTimeMillis()));
         measurementRepository.save(measurement);
     }
     public List<Measurement> listAll() {
@@ -34,6 +36,9 @@ public class MeasurementService {
     }
     public void delete(Measurement measurement){
         measurementRepository.delete(measurement);
+    }
+    public void deleteById(Long id) {
+        measurementRepository.deleteById(id);
     }
 
 

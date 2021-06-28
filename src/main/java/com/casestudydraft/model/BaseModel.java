@@ -3,7 +3,8 @@ package com.casestudydraft.model;
 /*
 
 
-Base Model that every POJO extends. I wanted to get created_on and updated_on in each entity so this was the best way
+Base Model that every POJO extends. I wanted to get created_on and updated_on in each entity so this was the best way of doing that
+For right now
  */
 
 import javax.persistence.Column;

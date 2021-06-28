@@ -3,6 +3,7 @@ package com.casestudydraft.webcontroller;
 import com.casestudydraft.model.Pantry;
 import com.casestudydraft.model.User;
 import com.casestudydraft.service.PantryService;
+import com.casestudydraft.service.RoleService;
 import com.casestudydraft.service.SecurityService;
 import com.casestudydraft.service.UserService;
 import com.casestudydraft.tools.UserValidator;
@@ -36,6 +37,9 @@ public class AuthController {
     @Autowired
     private PantryService pantryService;
 
+    @Autowired
+    private RoleService roleService;
+
     @GetMapping("/accessDenied")
     public String accessDenied(){
         return "misc/accessDenied";
@@ -54,7 +58,11 @@ public class AuthController {
         }
         userForm.setPantry(new Pantry());
         userService.save(userForm);
-
+        if(userForm.getId()==1){
+            //this is the first user so make him an admin
+            roleService.createAdmin();
+            roleService.setAdmin();
+        }
         securityService.autoLogin(userForm.getUsername(), userForm.getPasswordConfirm());
 
         return "redirect:/dashboard";

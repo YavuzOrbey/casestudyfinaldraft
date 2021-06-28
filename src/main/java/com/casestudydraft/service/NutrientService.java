@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @Service
@@ -17,6 +18,7 @@ public class NutrientService  {
     NutrientRepository nutrientRepository;
 
     public void save(Nutrient nutrient){
+        nutrient.setUpdated_on(new Timestamp(System.currentTimeMillis()));
         nutrientRepository.save(nutrient);
     }
     public List<Nutrient> findAll() {

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.logging.Logger;
 
+//class I messed around with to figure out accessdenial in Spring Security
 public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 
 //    public static final Logger LOG

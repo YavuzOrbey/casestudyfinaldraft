@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
+//Creates Measurement API endpoints
 @CrossOrigin
 @RestController
 @RequestMapping("api")

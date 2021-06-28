@@ -62,6 +62,8 @@ public class PantryAPIController {
         Recipe recipe = recipeService.get(recipeId);
         boolean readyToMake = true;
         for (RecipeIngredient recipeIngredient: recipe.getRecipeIngredients()) {
+            // loop through the ingredient's of the recipe and if the user's pantry doesn't have the quantity of that specific ingredient
+            // make sure to through an ingredientexception
             if(!pantryService.hasEnough(user.getPantry(),recipeIngredient.getIngredient(),recipeIngredient.getQuantity())){
                 readyToMake = false;
                 throw new IngredientException("Not Enough ingredients!");

@@ -29,8 +29,14 @@ function addRecipe(recipe, number){
     li.dataset.id=recipe.id +"-"+number
     li.appendChild(button)
     day.appendChild(li);
-    document.getElementById("day-")
-    <h6 onclick="makeRecipe() " class="btn btn-outline-primary" style="cursor: pointer; ">Make Meal!</h6>
+    let h6 = document.createElement("H6")
+    h6.addEventListener("click", makeRecipe);
+    h6.classList.add("btn", "btn-outline-primary")
+    h6.style = "cursor: pointer"
+    h6.innerText = "Make Meal!";
+
+    day.appendChild(h6);
+    /*<h6 onclick="makeRecipe() " class="btn btn-outline-primary" style="cursor: pointer; ">Make Meal!</h6>*/
 }
 
 function clearRecipeInput(){
@@ -65,8 +71,8 @@ function showRecipes() {
     }
 }
 
-function makeRecipe(){
-axios.get("/api/checkpantry?recipeId=1")
+function makeRecipe(recipeId){
+axios.get("/api/checkpantry?recipeId="+recipeId)
         .then(function(response){
              let messages = document.getElementById("messages");
                       messages.innerHTML = "Meal made. Pantry updated!"

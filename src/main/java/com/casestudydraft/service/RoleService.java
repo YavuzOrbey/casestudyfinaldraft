@@ -8,6 +8,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -20,7 +21,11 @@ public class RoleService {
     RoleRepository roleRepository;
 
     public void save(Role role){
+        role.setUpdated_on(new Timestamp(System.currentTimeMillis()));
         roleRepository.save(role);
+
+
+
     }
 
     public void giveUserRole(User user, Role role){

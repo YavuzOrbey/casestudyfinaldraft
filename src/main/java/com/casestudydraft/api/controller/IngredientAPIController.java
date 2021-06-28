@@ -36,6 +36,13 @@ public class IngredientAPIController {
     @Autowired
     MeasurementService measurementService;
 
+
+    @ModelAttribute("ingredients")
+    public ArrayList<Ingredient> ingredients(){
+        List<Ingredient> ingredients = ingredientService.findAll();
+        return (ArrayList<Ingredient>) ingredients;
+    }
+
     // the route localhost:8080/api/ingredients will send a json string with all of the ingredients in the database
     @RequestMapping(value = "/ingredients")
     public List<Ingredient> viewAllIngredients(@ModelAttribute("ingredients") List<Ingredient> ingredients) {

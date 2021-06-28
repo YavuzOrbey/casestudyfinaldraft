@@ -13,6 +13,8 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
+//Just like CustomAccessDeniedHandler this gets called during the Spring Security Chain but I haven't 100% understood it yet
+//In the coming months as my application is worked on I will revisit it
 public class CustomAuthenticationFailureHandler
         implements AuthenticationFailureHandler {
 

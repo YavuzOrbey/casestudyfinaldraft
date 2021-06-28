@@ -13,6 +13,7 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+//Ingredient entity...because my entites use Jackson for JSON mapping I had to add those annotations
 @Entity
 @Table(name="ingredient")
 @JsonIgnoreProperties(ignoreUnknown = true)

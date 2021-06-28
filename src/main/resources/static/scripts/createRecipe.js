@@ -45,7 +45,9 @@ form.addEventListener("submit", function(event){
 
             if(response.data["recipeSteps"]) document.getElementById("step-error").innerText = response.data["recipeSteps"];
             else document.getElementById("step-error").innerText = "";
-
+            //if there are no errors you can reload
+            if(Object.entries(response.data).length==0)
+                 window.location.href="/recipe"
          }).catch(error=>console.log(error));
 })
 

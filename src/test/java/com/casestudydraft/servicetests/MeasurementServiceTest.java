@@ -3,23 +3,12 @@ import static org.junit.jupiter.api.Assertions.*;
 import com.casestudydraft.model.Measurement;
 import com.casestudydraft.repository.MeasurementRepository;
 import com.casestudydraft.service.MeasurementService;
-import org.aspectj.lang.annotation.Before;
 import org.hibernate.Hibernate;
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.annotation.Rollback;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
-
-import static org.mockito.ArgumentMatchers.anyLong;
 import java.util.Optional;
 
 
@@ -36,12 +25,10 @@ public class MeasurementServiceTest {
     private MeasurementRepository measurementRepository;
 
     static Long testId;
-    static final String name = String.valueOf(Math.random()*Integer.MAX_VALUE);
     @Test
     @Order(1)
-    @Rollback
     void testSave() {
-        Measurement measurement = new Measurement(name);
+        Measurement measurement = new Measurement("test");
         measurementService.save(measurement);
         testId = measurement.getId();
         assertNotNull(measurement.getId());
@@ -51,7 +38,7 @@ public class MeasurementServiceTest {
     @Order(2)
     @Transactional
     void testGet() {
-        Measurement expected = new Measurement(name);
+        Measurement expected = new Measurement("test");
         expected.setId(testId);
 
         //I'm getting a org.hibernate.LazyInitializationException: could not initialize proxy [com.casestudydraft.model.Measurement#20] - no Session error
@@ -78,7 +65,7 @@ public class MeasurementServiceTest {
         testId = actual.getId();
 
         //change it and save it
-        actual.setName(name+ "-updated");
+        actual.setName("test-updated");
         measurementService.save(actual);
 
         //make sure the ids are still the same
@@ -86,18 +73,10 @@ public class MeasurementServiceTest {
     }
     @Test
     @Order(4)
-    @Transactional
     void testDelete(){
-        //get measurement
-        Measurement proxy = measurementService.get(testId);
-        Object actual1 = Hibernate.unproxy(proxy);
-        Measurement measurement = (Measurement) actual1;
-
-        measurementService.delete(measurement);
-
+        measurementService.deleteById(testId);
         //the id shouldn't be there anymore
-        assertEquals(measurementRepository.findById(measurement.getId()), Optional.empty());
-
+        assertEquals(measurementRepository.findById(testId), Optional.empty());
 
     }
 

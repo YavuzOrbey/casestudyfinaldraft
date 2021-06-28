@@ -11,13 +11,16 @@ import java.util.List;
 public interface RoleRepository extends JpaRepository<Role, Long> {
     List<Role> findByName(String name);
 
+    //CONSTANTS are right here
+     String createAdmin =  "insert into role(id, name) VALUES (1, 'admin')";
+     String setAdmin = "insert into user_roles(users_id, roles_id) VALUES (1, 1)";
     @Modifying
-    @Query(value = "insert into role(id, name) VALUES (1, 'admin')", nativeQuery = true)
+    @Query(value =createAdmin, nativeQuery = true)
     @Transactional
     void createAdmin();
 
     @Modifying
-    @Query(value = "insert into user_roles(users_id, roles_id) VALUES (1, 1)", nativeQuery = true)
+    @Query(value = setAdmin, nativeQuery = true)
     @Transactional
     void setAdmin();
 }

@@ -39,6 +39,7 @@ public class RecipeAPIController {
         JsonNode recipeIngredientsJson = jsonObject.path("recipeIngredients");
         List<RecipeIngredient> recipeIngredients = new ArrayList<>();
 
+
         recipeIngredientsJson.forEach(recipeIngredientObj->{
             Ingredient ingredient = ingredientService.get(Long.parseLong(recipeIngredientObj.path("id").toString()));
             int quantity = Integer.parseInt(recipeIngredientObj.path("amount").toString());
@@ -58,7 +59,7 @@ public class RecipeAPIController {
             step.setRecipe(recipe);
             recipeSteps.add(step);
         });
-        System.out.println(recipeIngredients);
+
         recipe.setRecipeIngredients(recipeIngredients);
         recipe.setRecipeSteps(recipeSteps);
         Map<String, String> errors = new HashMap<>();
@@ -67,7 +68,8 @@ public class RecipeAPIController {
             recipeService.save(recipe);
         }
         catch(ConstraintViolationException e){
-
+            //here is where I add each constraint violation error into a hashmap
+            // the hashmap will get sent by this controller back as an AJAX response
             Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
             violations.forEach(violation->{
                 errors.put(violation.getPropertyPath().toString(), violation.getMessage());

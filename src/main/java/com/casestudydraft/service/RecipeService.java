@@ -6,6 +6,7 @@ import com.casestudydraft.tools.KeyValuePair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,7 @@ public class RecipeService {
     RecipeRepository recipeRepository;
 
     public void save(Recipe recipe){
+        recipe.setUpdated_on(new Timestamp(System.currentTimeMillis()));
         recipeRepository.save(recipe);
     }
     public List<Recipe> findAll() {

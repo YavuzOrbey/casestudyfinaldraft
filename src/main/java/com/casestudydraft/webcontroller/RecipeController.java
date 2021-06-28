@@ -4,6 +4,7 @@ import com.casestudydraft.model.*;
 import com.casestudydraft.service.*;
 import com.casestudydraft.tools.KeyValuePair;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -14,6 +15,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.InputStream;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -170,11 +177,18 @@ public class RecipeController {
              });
          });*/
 
+        //I left the above in as it was very difficult and it shows my pain in creating this app
         Map<String, KeyValuePair<AtomicInteger, String>> nutrition = recipeService.calculateNutrition(recipe);
-        System.out.println(nutrition);
-        System.out.println(recipe);
         mav.addObject("nutrition", nutrition);
         mav.addObject("recipe", recipe);
+        URL resource = getClass().getClassLoader().getResource("static/images/recipe-" + recipe.getId() + ".jpg");
+        Boolean image;
+        if (resource == null) {
+            image = false;
+        }else{
+            image = true;
+        }
+        mav.addObject("image", image);
         return mav;
     }
     @RequestMapping(value="/delete/{id}", method = RequestMethod.GET)

@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 @Service
@@ -21,6 +22,7 @@ public class IngredientService {
         return ingredientRepository.getById(id);
     }
     public Ingredient save(Ingredient ingredient){
+        ingredient.setUpdated_on(new Timestamp(System.currentTimeMillis()));
         return ingredientRepository.save(ingredient);
     }
     public List<Ingredient> findAll() {
